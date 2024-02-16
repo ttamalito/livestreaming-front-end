@@ -1,5 +1,7 @@
 import {useEffect} from "react";
-
+import {BrowserRouter} from "react-router-dom";
+import ProfileRoutes
+    from "./routes/profileRoutes/ProfileRoutes";
 function App() {
     useEffect(() => {
         fetch(`https://localhost:8443/`,
@@ -12,7 +14,9 @@ function App() {
     }, []);
   return (
     <div className="App">
-      <h1>Hello World!</h1>
+      <BrowserRouter>
+        <ProfileRoutes />
+      </BrowserRouter>
     </div>
   );
 }
