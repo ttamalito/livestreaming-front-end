@@ -1,8 +1,10 @@
 import {useParams} from "react-router-dom";
 
 import '../styles/watchLiveStream.css'
+import {useEffect, useRef, useState} from "react";
 
 export default function WatchLiveStream() {
+
     // get user being watched
     const params = useParams();
     const user = params.user;
