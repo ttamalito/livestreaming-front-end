@@ -2,17 +2,7 @@ import {useEffect, useRef, useState} from "react";
 
 
 export default function Live() {
-    // use Effect to mount a script
-    useEffect(() => {
-        fetch(`https://localhost:8443/user/live`, {
-            method: 'POST',
-            body: 'Hello Server, in how many chunks do you receive this?'
-        }).then(res => console.log(res));
-        fetch(`https://localhost:8443/user/live`, {
-            method: 'POST',
-            body: 'Hello Server again, is this the same stream?'
-        }).then(res => console.log(res));
-    }, []);
+
     // useRef for video src
     const [videoSrc, setVideoSrc] = useState(false);
     const videoRef = useRef(<video
@@ -49,8 +39,14 @@ function onClickStartLiveStream(setVideoSrc) {
         navigator.mediaDevices
             .getUserMedia({audio: true, video: true},)
             .then((stream) => {
-                // create a clone of the stream
+                // create a clone
                 const cloneStream = stream.clone();
+                console.log(`We have the stream`);
+                const audioTracks = stream.getAudioTracks();
+                console.log(`We have ${audioTracks.length} audio tracks`);
+                // remove the audio track
+                stream.removeTrack(audioTracks[0]);
+
                 // start playing the video
                 const vid = document.querySelector('#video-opt');
                 vid.srcObject = stream;
@@ -58,20 +54,16 @@ function onClickStartLiveStream(setVideoSrc) {
                     vid.play();
                 };
                 // create a Media Recorder
-                const recorder = new MediaRecorder(stream, {mimeType: 'video/webm;codecs=vp9'});
+                const recorder = new MediaRecorder(cloneStream, {mimeType: 'video/webm;codecs=vp9'});
                 recorder.ondataavailable = async (event) => {
                     console.log(`Data Size: ${event.data.size}`);
                     // send the data to the server
                     await onBlobDataAvailable(event);
                 }
                 // start recording
-                recorder.start(1); // every millisecond
+                recorder.start(2000); // every 2 seconds
                 console.log(`State of the recorder: ${recorder.state}`);
-                console.log(`We have the stream`);
-                const audioTracks = stream.getAudioTracks();
-                console.log(`We have ${audioTracks.length} audio tracks`);
-                // remove the audio track
-                //stream.removeTrack(audioTracks[0]);
+
                 setVideoSrc(true);
 
                 // add the audio track again
