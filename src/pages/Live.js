@@ -49,16 +49,53 @@ function onClickStartLiveStream(setVideoSrc) {
         navigator.mediaDevices
             .getUserMedia({audio: true, video: true},)
             .then((stream) => {
-                console.log(`We have the stream`);
-                setVideoSrc(true);
+                // create a clone of the stream
+                const cloneStream = stream.clone();
+                // start playing the video
                 const vid = document.querySelector('#video-opt');
                 vid.srcObject = stream;
                 vid.onloadedmetadata = function(e) {
                     vid.play();
                 };
-            })
+                // create a Media Recorder
+                const recorder = new MediaRecorder(stream, {mimeType: 'video/webm;codecs=vp9'});
+                recorder.ondataavailable = async (event) => {
+                    console.log(`Data Size: ${event.data.size}`);
+                    // send the data to the server
+                    await onBlobDataAvailable(event);
+                }
+                // start recording
+                recorder.start(1); // every millisecond
+                console.log(`State of the recorder: ${recorder.state}`);
+                console.log(`We have the stream`);
+                const audioTracks = stream.getAudioTracks();
+                console.log(`We have ${audioTracks.length} audio tracks`);
+                // remove the audio track
+                //stream.removeTrack(audioTracks[0]);
+                setVideoSrc(true);
+
+                // add the audio track again
+                // stream.addTrack(audioTracks[0]);
+
+            }) // end of then
     } // end of if to see if media is available
 } // end of handler
+
+/**
+ *
+ * @param {BlobEvent} event
+ */
+async function onBlobDataAvailable(event) {
+    const response  = await fetch(`https://localhost:8443/user/live`, {
+        method: 'POST',
+        headers: {
+            "Content-Type": event.data.type,
+            "Content-Length": event.data.size,
+        },
+        body: event.data
+    });
+
+}
 
 function onSubmitSendBigFile(event) {
     event.preventDefault();
