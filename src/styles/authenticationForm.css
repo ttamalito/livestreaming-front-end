@@ -1,0 +1,49 @@
+.authentication-form {
+    width: 80%;
+    margin: 42px auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    height: 50%;
+    align-items: center;
+}
+/*
+
+ */
+
+.authentication-form h1 {
+    margin: 6px auto;
+}
+
+.authentication-form button {
+    display: inline-block;
+    margin: 6px auto;
+}
+.authentication-form form {
+    width: 100%;
+    text-align: center;
+}
+
+
+.authentication-form-label-input {
+    display: flex;
+    flex-direction: column;
+    height: 50px;
+    width: 40%;
+    margin: 24px auto;
+}
+
+.authentication-form-label-input input {
+    border: 2px solid rgba(255, 255, 255, .2);
+    outline: none;
+    height: 100%;
+    width: 99%;
+    background: transparent;
+    border-radius: 40px;
+    font-size: 16px;
+    color: #fff;
+    padding: 20px 45px 20px 20px;
+}
+
+.authentication-form-label-input input::placeholder {
+    color: #fff;
+}
