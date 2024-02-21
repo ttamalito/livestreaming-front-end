@@ -1,70 +1,38 @@
-# Getting Started with Create React App
+# Simple Front-End for the [Livestreaming http2 server](https://github.com/ttamalito/http-2_livestreaming_backend_server)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is really simple, to to have some visuals to use the 
+backend server, the "main" project is the http2 backend server
 
-## Available Scripts
+## URLs
 
-In the project directory, you can run:
+* /live
+* /:user/watchLive
+* /login
+* /signup
 
-### `npm start`
+In order to login or create an account use the /login, /signup
+urls
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+In order to start a livestream go to /live
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+In order to start watching the livestream of a user go to
+/:user/watchLive, where :user should be replaced with the username
+that is livestreaming
 
-### `npm test`
+## Run locally
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+If you wish to run this project locally, you can clone the repository
+and make sure to clone the [backend server](https://github.com/ttamalito/http-2_livestreaming_backend_server) as well
+otherwise, this project is useless
 
-### `npm run build`
+### Requirements
+* You need to have Node.js installed
+* install all the dependencies by executing npm install
+* Check the requirements of the Backend server to have the full functionality
+* Make sure to have your own certificate as this project uses https, make sure that you need to have the same certificate in the backend server, otherwise all the requests through the [fetch() API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) will not be successful .
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+To start the server simply execute
+npm start in your terminal 
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+For details about the logic behind the backend server
+please visit the [respective repository](https://github.com/ttamalito/http-2_livestreaming_backend_server)
